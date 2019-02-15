@@ -70,8 +70,8 @@ function ucam_profile_func($atts = [ ]) {
     $full = new PersonMethods($conn);
     $bpid = bp_displayed_user_id();
     $crsid = get_display_name($bpid);
-    echo $crsid;
     $b = $full->getAttributes('crsid', $crsid, 'all_attrs');
+    var_dump($b);
     $data = array();
     foreach ($b as $c) {
         $data[$c->scheme] = $c->value;
