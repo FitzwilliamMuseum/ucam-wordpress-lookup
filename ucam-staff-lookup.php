@@ -63,7 +63,7 @@ function ucam_staff_func($atts = []) {
 function get_display_name($user_id) {
     if (!$user = get_userdata($user_id))
         return false;
-    return $user->data->display_name;
+    return $user->data->user_login;
 }
 function ucam_profile_func($atts = [ ]) {
     $conn = IbisClientConnection::createConnection();
