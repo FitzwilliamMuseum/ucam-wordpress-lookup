@@ -28,15 +28,15 @@ function ucam_profile_func($atts = [ ]) {
     $full = new PersonMethods($conn);
     $bpid = bp_displayed_user_id();
     $crsid = get_display_name($bpid);
-    $b = $full->getAttributes('crsid', $crsid, 'all_attrs');
-    $data = array();
-    foreach ($b as $c) {
-      $data[$c->scheme] = $c->value;
-    }
-    foreach ($data as $k => $v) {
-      echo ucfirst($k) . ' : ' . $v;
-      echo '<br >';
-    }
+    // $b = $full->getAttributes('crsid', $crsid, 'all_attrs');
+    // $data = array();
+    // foreach ($b as $c) {
+    //   $data[$c->scheme] = $c->value;
+    // }
+    // foreach ($data as $k => $v) {
+    //   echo ucfirst($k) . ' : ' . $v;
+    //   echo '<br >';
+    // }
     echo '<img src="https://www.lookup.cam.ac.uk/person/crsid/'. $crsid. '/photo-1.jpg" />';
 }
 
