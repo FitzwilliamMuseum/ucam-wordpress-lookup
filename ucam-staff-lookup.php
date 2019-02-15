@@ -18,11 +18,6 @@ require_once "vendor/ibisclient/client/IbisClientConnection.php";
 require_once "vendor/ibisclient/methods/InstitutionMethods.php";
 require_once "vendor/ibisclient/methods/PersonMethods.php";
 
-function getConnection() {
-    $conn = IbisClientConnection::createConnection();
-    return $conn;
-}
-
 function ucam_staff_func($atts = []) {
     $conn = IbisClientConnection::createConnection();
     $im = new InstitutionMethods($conn);
@@ -33,12 +28,6 @@ function ucam_staff_func($atts = []) {
     foreach ($b as $c) {
         $data[$c->scheme] = $c->value;
     }
-//    foreach ($data as $k => $v) {
-//        echo ucfirst($k) . ' : ' . $v;
-//        echo '<br >';
-//    }
-//    echo '<img src="https://www.lookup.cam.ac.uk/person/crsid/dejp3/photo-1.jpg" />';
-
     print("<h3>Fitz Museum Staff</h3>");
     foreach ($people as $person) {
         $p = $person;
@@ -71,7 +60,7 @@ function ucam_profile_func($atts = [ ]) {
     $bpid = bp_displayed_user_id();
     $crsid = get_display_name($bpid);
     $b = $full->getAttributes('crsid', $crsid, 'all_attrs');
-    var_dump($b);
+    var_dump($conn);
     $data = array();
     foreach ($b as $c) {
         $data[$c->scheme] = $c->value;
