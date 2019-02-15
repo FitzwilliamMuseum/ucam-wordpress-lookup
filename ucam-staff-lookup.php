@@ -18,37 +18,6 @@ require_once "vendor/ibisclient/client/IbisClientConnection.php";
 require_once "vendor/ibisclient/methods/InstitutionMethods.php";
 require_once "vendor/ibisclient/methods/PersonMethods.php";
 
-function ucam_staff_func($atts = []) {
-    $conn = IbisClientConnection::createConnection();
-    $im = new InstitutionMethods($conn);
-    $full = new PersonMethods($conn);
-    $people = $im->getMembers("FITZM");
-    $b = $full->getAttributes('crsid', 'dejp3', 'all_attrs');
-    $data = array();
-    foreach ($b as $c) {
-        $data[$c->scheme] = $c->value;
-    }
-    print("<h3>Fitz Museum Staff</h3>");
-    foreach ($people as $person) {
-        $p = $person;
-        $d = array($p)[0];
-        echo '<br />';
-        echo '<h4>' . $d->registeredName . '</h4>';
-        echo 'CRSID: ' . $p->identifier->value;
-        echo '<br />';
-        $full = new PersonMethods($conn);
-        $a = $full->getPerson('crsid', $p->identifier->value, 'all_attrs');
-        echo 'Visible name: ' . $a->visibleName;
-        echo '<br />';
-        echo 'Surname: ' . $a->surname;
-        echo '<br />';
-        echo 'Affiliation: ' . $a->misAffiliation;
-        echo '<br />';
-        echo '<img src="https://www.lookup.cam.ac.uk/person/crsid/' . $p->identifier->value . '/photo-1.jpg" width="100"/>';
-    }
-
-
-}
 function get_display_name($user_id) {
     if (!$user = get_userdata($user_id))
         return false;
@@ -60,17 +29,15 @@ function ucam_profile_func($atts = [ ]) {
     $bpid = bp_displayed_user_id();
     $crsid = get_display_name($bpid);
     $b = $full->getAttributes('crsid', $crsid, 'all_attrs');
-    var_dump($conn);
     $data = array();
     foreach ($b as $c) {
-        $data[$c->scheme] = $c->value;
+      $data[$c->scheme] = $c->value;
     }
     foreach ($data as $k => $v) {
-        echo ucfirst($k) . ' : ' . $v;
-        echo '<br >';
+      echo ucfirst($k) . ' : ' . $v;
+      echo '<br >';
     }
     echo '<img src="https://www.lookup.cam.ac.uk/person/crsid/'. $crsid. '/photo-1.jpg" />';
 }
 
-add_shortcode('ucamlookup', 'ucam_staff_func');
 add_shortcode( 'ucamprofile', 'ucam_profile_func');
