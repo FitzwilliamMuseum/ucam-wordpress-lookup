@@ -79,4 +79,4 @@ function ucam_profile_func($atts = [ ]) {
 }
 
 add_shortcode('ucamlookup', 'ucam_staff_func');
-add_shortcode( 'ucamlookup', 'ucam_profile_func');
+add_shortcode( 'ucamprofile', 'ucam_profile_func');
