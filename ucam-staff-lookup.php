@@ -64,8 +64,8 @@ function ucam_staff_func($atts = []) {
 function ucam_profile_func($atts = [ ]) {
     $conn = IbisClientConnection::createConnection();
     $full = new PersonMethods($conn);
-    var_dump($atts);
     $crsid = bp_displayed_user_id();
+    echo $crsid;
     $b = $full->getAttributes('crsid', $crsid, 'all_attrs');
     $data = array();
     foreach ($b as $c) {
