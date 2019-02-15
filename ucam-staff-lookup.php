@@ -60,11 +60,16 @@ function ucam_staff_func($atts = []) {
 
 
 }
-
+function get_display_name($user_id) {
+    if (!$user = get_userdata($user_id))
+        return false;
+    return $user->data->display_name;
+}
 function ucam_profile_func($atts = [ ]) {
     $conn = IbisClientConnection::createConnection();
     $full = new PersonMethods($conn);
-    $crsid = bp_displayed_user_id();
+    $bpid = bp_displayed_user_id();
+    $crsid = get_display_name($bpid);
     echo $crsid;
     $b = $full->getAttributes('crsid', $crsid, 'all_attrs');
     $data = array();
